@@ -1,4 +1,4 @@
-# katoline
+# katoline-web
 
 Astro + TailwindCSS で構築されたシンプルでモダンなプロフィールサイトです。
 
