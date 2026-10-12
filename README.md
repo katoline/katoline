@@ -45,7 +45,7 @@ pnpm preview
 ```
 /
 ├── public/                    # 静的ファイル（画像、アイコンなど）
-│   └── icon-otaku.webp
+│   └── icon-dev.webp
 ├── src/
 │   ├── components/            # Astroコンポーネント
 │   │   ├── mdx/              # ブログ MDX から使うコンポーネント
