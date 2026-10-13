@@ -6,7 +6,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check",
+    "check:links": "node scripts/check-links.mjs",
+    "verify": "pnpm check && pnpm build && pnpm check:links"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
@@ -17,5 +20,9 @@
     "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
     "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3"
   }
 }
