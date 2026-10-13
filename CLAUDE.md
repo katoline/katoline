@@ -15,9 +15,12 @@ Astro + Tailwind CSS + TypeScript で構築された日本語の個人プロフ�
 - `pnpm dev` — 開発サーバー起動（http://localhost:4321）
 - `pnpm build` — 本番ビルド（`dist/` に出力）
 - `pnpm preview` — 本番ビルドのプレビュー
+- `pnpm check` — `astro check` による型チェック
+- `pnpm check:links` — ビルド成果物（`dist/`）の内部リンク切れ検査（`scripts/check-links.mjs`）
+- `pnpm verify` — 型チェック→ビルド→リンク検査。変更後はこれを通す
 - パッケージマネージャー: **pnpm**
 
-リンター・フォーマッター・テストフレームワークは未設定。
+リンター・フォーマッター・テストフレームワークは未設定。検証は `pnpm verify` と CI（`.github/workflows/ci.yml`）で行う。
 
 ## アーキテクチャ
 
@@ -76,6 +79,13 @@ Layout.astro（HTML シェル・テーマ初期化・Google Fonts・SiteHeader�
 
 - `build.inlineStylesheets: "always"` — CSS を常に HTML へインライン化し、クリティカルパスから外す
 - `vite.build.cssMinify: "esbuild"` — CSS を esbuild で圧縮
+
+### デプロイ・配信
+
+- Vercel（Hobby）に静的出力（adapter なし）でデプロイ
+- `vercel.json` で `headers` のみ定義（キャッシュとセキュリティヘッダー）。`/_astro/*` は immutable、`*.webp` は1週間、HTML は Vercel 既定
+- CSP は未設定（インラインスクリプト・onerror 属性があるため）
+- Dependabot が依存更新 PR を出し、CI（`.github/workflows/ci.yml`）が通ったものをマージする
 
 ### React 統合について
 

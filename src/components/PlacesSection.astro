@@ -34,7 +34,7 @@ const hasSubAreas = areas.length > 1 || Boolean(areas[0]?.title);
 const sectionCount = areas.reduce((n, area) => n + area.places.length, 0);
 
 const rowClass =
-  'flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-foreground break-words transition-colors';
+  'flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-foreground wrap-break-word transition-colors';
 ---
 
 <section aria-labelledby={sectionId} class={extraClass}>
@@ -64,14 +64,14 @@ const rowClass =
                   class:list={[rowClass, 'hover:bg-[var(--surface-hover)] hover:text-accent']}
                   {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 >
-                  <span class="min-w-0 break-words">{place.label}</span>
+                  <span class="min-w-0 wrap-break-word">{place.label}</span>
                   {external && (
                     <span class="shrink-0 text-sm text-subtle" aria-hidden="true">↗</span>
                   )}
                 </a>
               ) : (
                 <div class={rowClass}>
-                  <span class="min-w-0 break-words">{place.label}</span>
+                  <span class="min-w-0 wrap-break-word">{place.label}</span>
                 </div>
               )}
             </li>

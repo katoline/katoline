@@ -40,6 +40,13 @@ pnpm build
 pnpm preview
 ```
 
+### 検証
+
+```bash
+# 型チェック → ビルド → 内部リンク検査
+pnpm verify
+```
+
 ## 📁 プロジェクト構造
 
 ```
@@ -81,6 +88,8 @@ pnpm preview
 │   │   └── watch-anime.astro # 今期視聴アニメのラッパー（本体は src/anime-list/）
 │   └── styles/               # グローバルスタイル
 │       └── global.css
+├── scripts/
+│   └── check-links.mjs       # ビルド成果物の内部リンク切れ検査
 ├── astro.config.mjs          # Astro設定ファイル
 ├── flake.nix                 # Nix devShell（Node 22 + pnpm）
 ├── flake.lock
@@ -88,6 +97,7 @@ pnpm preview
 ├── .envrc                    # direnv: use flake
 ├── tailwind.config.mjs       # TailwindCSS設定ファイル
 ├── tsconfig.json             # TypeScript設定ファイル
+├── vercel.json               # Vercel のキャッシュ・セキュリティヘッダー設定
 └── package.json
 ```
 
