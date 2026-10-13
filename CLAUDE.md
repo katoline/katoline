@@ -11,7 +11,7 @@ Astro + Tailwind CSS + TypeScript で構築された日本語の個人プロフ�
 前提: Nix + direnv。`cd` すると `flake.nix` の devShell が有効になり、node / pnpm が入る（グローバルには入れない）。初回のみ `direnv allow`。
 
 - `pnpm install` — Node パッケージのインストール（`pnpm-lock.yaml` で管理）
-- `pnpm-workspace.yaml` の `allowBuilds` は pnpm 11 向け（esbuild / sharp の postinstall を許可）。モノレポではない
+- `pnpm-workspace.yaml` の `allowBuilds` は pnpm 11 向け（esbuild / sharp の postinstall を許可）。`overrides` は推移依存の脆弱性対応で修正版を固定するもの。モノレポではない
 - `pnpm dev` — 開発サーバー起動（http://localhost:4321）
 - `pnpm build` — 本番ビルド（`dist/` に出力）
 - `pnpm preview` — 本番ビルドのプレビュー
@@ -26,7 +26,7 @@ Astro + Tailwind CSS + TypeScript で構築された日本語の個人プロフ�
 
 ### ルーティングとページ構造
 
-Astro v5 のファイルベースルーティング。`src/pages/` が URL に直接対応する。
+Astro v7 のファイルベースルーティング。`src/pages/` が URL に直接対応する。
 
 - `index.astro` — プロフィール写真・SNSリンク・ページリンクを表示するホームページ
 - `blog.astro` / `blog/[slug].astro` — Content Collections（MDX）によるブログ一覧・詳細
@@ -51,7 +51,7 @@ Layout.astro（HTML シェル・テーマ初期化・Google Fonts・SiteHeader�
 
 - **ブログ記事**: `src/content/blog/` に MDX（`.mdx`）。スキーマは `src/content.config.ts`（`title` 必須、`date` 任意、`draft` で非公開フィルタ）
 - **MDX コンポーネント**: `src/components/mdx/` を `blog/[slug].astro` の `<Content components={...} />` に渡す。記事側で import せず `<Details summary="...">` のように使える。新しいブログ用コンポーネントも同じ場所に追加する
-- **コードフェンス**: `json:package.json` のように `lang:filename` と書くと、Shiki の言語とファイル名表示に分解される（`src/lib/remark-code-filename.mjs`）
+- **コードフェンス**: `json:package.json` のように `lang:filename` と書くと、Shiki の言語とファイル名表示に分解される（`src/lib/remark-code-filename.mjs`。remark プラグインを使うため `astro.config.mjs` で v7 の既定 Sätteri ではなく `unified()` パイプラインを指定している）
 - **アニメリスト**: `src/anime-list/` に集約。`anime-list.ts` が過去視聴分を `OldWatchAnimes`（`string[]`）として export → `src/pages/old-watch-anime.astro` で使用。今期分は `src/anime-list/watch-anime.astro` 内に `Place[]` で定義（`src/pages/watch-anime.astro` はこれを描画するだけのラッパーで、Astro のルーティングのために `src/pages/` に置いている）。前期分は `src/anime-list/last-season-anime.astro` に同じ形で定義する
   - シーズンが変わったら `/season-change`（`.claude/skills/season-change/`）で今期分を前期へ移し（前期の旧一覧は置き換えで消える）、新シーズンの放送作品を公式サイト付きで調べて `src/anime-list/season-anime-list.md` に出力する
   - 新しく見たタイトルは `src/anime-list/anime-list.md`（gitignore 対象）に1行1タイトルで書き、`/anime-list`（`.claude/skills/anime-list/`）で `OldWatchAnimes` 末尾へ転記する。転記後 md は空になる
@@ -78,7 +78,6 @@ Layout.astro（HTML シェル・テーマ初期化・Google Fonts・SiteHeader�
 `astro.config.mjs` でパフォーマンス最適化を明示している。
 
 - `build.inlineStylesheets: "always"` — CSS を常に HTML へインライン化し、クリティカルパスから外す
-- `vite.build.cssMinify: "esbuild"` — CSS を esbuild で圧縮
 
 ### デプロイ・配信
 

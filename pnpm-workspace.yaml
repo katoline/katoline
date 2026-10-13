@@ -2,3 +2,7 @@
 allowBuilds:
   esbuild: true
   sharp: true
+
+# 推移依存の脆弱性対応（anymatch@3 経由の picomatch 2.x を修正版以上に固定）
+overrides:
+  picomatch@2: ^2.3.2
