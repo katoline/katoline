@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ListPageLayout from '../components/ListPageLayout.astro';
+import PlacesSection, {
+  type Place,
+} from '../components/PlacesSection.astro';
+
+// 前期視聴アニメのリスト
+// 今期のアニメが終わったら、watch-anime.astro の thisSeasonAnimes をここへ移し、
+// lastSeasonTitle もそのシーズン名に合わせる
+// 例:
+// { label: 'アニメタイトル', href: 'https://example.com' }
+const lastSeasonTitle = '2026年夏アニメ';
+const lastSeasonAnimes: Place[] = [];
+---
+
+<Layout
+  title="前期視聴アニメ - @tonosaki"
+  description="前期に視聴していたアニメのメモです。"
+>
+  <ListPageLayout
+    title="前期視聴アニメ"
+    backHref="/"
+    description="前期に視聴していたアニメのメモです。"
+  >
+    <PlacesSection
+      sectionId="last-season-anime-heading"
+      title="前期視聴アニメ一覧"
+      class="mb-4"
+      countSuffix="作品"
+      areas={[
+        {
+          id: 'last-season-anime',
+          title: lastSeasonTitle,
+          places: lastSeasonAnimes,
+        },
+      ]}
+    />
+  </ListPageLayout>
+</Layout>
