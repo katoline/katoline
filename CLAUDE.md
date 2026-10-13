@@ -45,7 +45,7 @@ Layout.astro（HTML シェル・テーマ初期化・Google Fonts・SiteHeader�
         └── ListSectionTitle.astro（見出しと区切り線）
 ```
 
-ブログ以外のリストページ（アニメ・生息地）はすべて `ListPageLayout` → `PlacesSection` の構成。新しいリストページを追加する場合もこのパターンに従う。
+ブログ以外のリストページ（アニメ・生息地）はすべて `ListPageLayout` → `PlacesSection` の構成。新しいリストページを追加する場合もこのパターンに従う。ただし `old-watch-anime.astro` は検索付きの単純リスト（`OldWatchAnimes` の `<ul>`）で、PlacesSection を使わない例外。
 
 ### データ管理
 
@@ -84,11 +84,8 @@ Layout.astro（HTML シェル・テーマ初期化・Google Fonts・SiteHeader�
 - Vercel（Hobby）に静的出力（adapter なし）でデプロイ
 - `vercel.json` で `headers` のみ定義（キャッシュとセキュリティヘッダー）。`/_astro/*` は immutable、`*.webp` は1週間、HTML は Vercel 既定
 - CSP は未設定（インラインスクリプト・onerror 属性があるため）
+- `astro.config.mjs` に `site: "https://katoline.com"` を設定している（canonical と OGP の絶対 URL の基点）。`Layout.astro` が全ページに canonical・OGP・Twitter カードのメタを出す。OGP 画像は `public/og.png`（1200×630、英数字のみ。日本語フォントが無い環境でも化けないため）
 - Dependabot が依存更新 PR を出し、CI（`.github/workflows/ci.yml`）が通ったものをマージする
-
-### React 統合について
-
-`@astrojs/react` が integration として設定され `react` / `react-dom` / `react-icons` が依存に入っているが、**現状どのコンポーネントでも React は未使用**（`.jsx`/`.tsx` も `client:` ディレクティブも存在しない）。アイコンや UI はすべて Astro コンポーネント内で完結している。React を使う前提で実装を進める前に、本当に必要か確認すること。
 
 ## 規約
 
