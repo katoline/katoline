@@ -27,8 +27,9 @@ Astro v5 のファイルベースルーティング。`src/pages/` が URL に�
 
 - `index.astro` — プロフィール写真・SNSリンク・ページリンクを表示するホームページ
 - `blog.astro` / `blog/[slug].astro` — Content Collections（MDX）によるブログ一覧・詳細
-- `watch-anime.astro` — 今期視聴アニメ一覧（データはページ内に `Place[]` として定義）
-- `old-watch-anime.astro` — 過去に視聴したアニメ・漫画一覧。`anime-list.ts` の `OldWatchAnimes` を表示し、クライアントサイド JS でインクリメンタル検索フォームを提供
+- `watch-anime.astro` — 今期視聴アニメのラッパー。中身は `src/anime-list/watch-anime.astro` を描画するだけ（データ・描画の本体は `src/anime-list/`）
+- `last-season-anime.astro` — 前期視聴アニメのラッパー。中身は `src/anime-list/last-season-anime.astro` を描画するだけ
+- `old-watch-anime.astro` — 過去に視聴したアニメ・漫画一覧。`src/anime-list/anime-list.ts` の `OldWatchAnimes` を表示し、クライアントサイド JS でインクリメンタル検索フォームを提供
 - `habitats.astro` — よく行く場所一覧（データはページ内に `Place[]` として定義）
 
 ### レイアウトとコンポーネントの階層
@@ -48,7 +49,9 @@ Layout.astro（HTML シェル・テーマ初期化・Google Fonts・SiteHeader�
 - **ブログ記事**: `src/content/blog/` に MDX（`.mdx`）。スキーマは `src/content.config.ts`（`title` 必須、`date` 任意、`draft` で非公開フィルタ）
 - **MDX コンポーネント**: `src/components/mdx/` を `blog/[slug].astro` の `<Content components={...} />` に渡す。記事側で import せず `<Details summary="...">` のように使える。新しいブログ用コンポーネントも同じ場所に追加する
 - **コードフェンス**: `json:package.json` のように `lang:filename` と書くと、Shiki の言語とファイル名表示に分解される（`src/lib/remark-code-filename.mjs`）
-- **アニメリスト**: `src/lib/anime-list.ts` が過去視聴分を `OldWatchAnimes`（`string[]`）として export → `old-watch-anime.astro` で使用。今期分は `watch-anime.astro` 内に `Place[]` で定義
+- **アニメリスト**: `src/anime-list/` に集約。`anime-list.ts` が過去視聴分を `OldWatchAnimes`（`string[]`）として export → `src/pages/old-watch-anime.astro` で使用。今期分は `src/anime-list/watch-anime.astro` 内に `Place[]` で定義（`src/pages/watch-anime.astro` はこれを描画するだけのラッパーで、Astro のルーティングのために `src/pages/` に置いている）。前期分は `src/anime-list/last-season-anime.astro` に同じ形で定義する
+  - シーズンが変わったら `/season-change`（`.claude/skills/season-change/`）で今期分を前期へ移し（前期の旧一覧は置き換えで消える）、新シーズンの放送作品を公式サイト付きで調べて `src/anime-list/season-anime-list.md` に出力する
+  - 新しく見たタイトルは `src/anime-list/anime-list.md`（gitignore 対象）に1行1タイトルで書き、`/anime-list`（`.claude/skills/anime-list/`）で `OldWatchAnimes` 末尾へ転記する。転記後 md は空になる
 - **生息地データ**: `habitats.astro` 内に `Place[]` で直接定義
 
 ### テーマシステム
