@@ -13,7 +13,7 @@ import { OldWatchAnimes } from '../anime-list/anime-list';
     backHref="/"
     description="今まで視聴したアニメ、漫画の一覧です。"
   >
-    <form class="card mb-4 p-4 sm:p-5" onsubmit="event.preventDefault();">
+    <form id="anime-search-form" class="card mb-4 p-4 sm:p-5">
       <div class="flex items-baseline justify-between gap-3">
         <label class="text-sm text-muted" for="anime-search">
           アニメ、漫画名で検索
@@ -46,6 +46,11 @@ import { OldWatchAnimes } from '../anime-list/anime-list';
     const list = document.getElementById('anime-list');
     const empty = document.getElementById('search-empty');
     const count = document.getElementById('search-count');
+
+    // Enter で送信してページが再読み込みされないようにする（検索は input イベントで即時に行う）
+    document.getElementById('anime-search-form')?.addEventListener('submit', (event) => {
+      event.preventDefault();
+    });
 
     if (input instanceof HTMLInputElement && list) {
       const items = Array.from(list.querySelectorAll('li'));
