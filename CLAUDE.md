@@ -11,7 +11,7 @@ Astro + Tailwind CSS + TypeScript で構築された日本語の個人プロフ�
 前提: Nix + direnv。`cd` すると `flake.nix` の devShell が有効になり、node / pnpm が入る（グローバルには入れない）。初回のみ `direnv allow`。
 
 - `pnpm install` — Node パッケージのインストール（`pnpm-lock.yaml` で管理）
-- `pnpm-workspace.yaml` の `allowBuilds` は pnpm 11 向け（esbuild / sharp の postinstall を許可）。モノレポではない
+- `pnpm-workspace.yaml` の `allowBuilds` は pnpm 11 向け（esbuild / sharp の postinstall を許可）。`overrides` は推移依存の脆弱性対応で修正版を固定するもの。モノレポではない
 - `pnpm dev` — 開発サーバー起動（http://localhost:4321）
 - `pnpm build` — 本番ビルド（`dist/` に出力）
 - `pnpm preview` — 本番ビルドのプレビュー
