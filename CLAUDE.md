@@ -17,10 +17,11 @@ Astro + Tailwind CSS + TypeScript で構築された日本語の個人プロフ�
 - `pnpm preview` — 本番ビルドのプレビュー
 - `pnpm check` — `astro check` による型チェック
 - `pnpm check:links` — ビルド成果物（`dist/`）の内部リンク切れ検査（`scripts/check-links.mjs`）
-- `pnpm verify` — 型チェック→ビルド→リンク検査。変更後はこれを通す
+- `pnpm lint` — Biome による lint・フォーマット・import 整列の検査（`biome check .`）。`pnpm lint:fix` で安全な修正を自動適用
+- `pnpm verify` — Biome→型チェック→ビルド→リンク検査。変更後はこれを通す
 - パッケージマネージャー: **pnpm**
 
-リンター・フォーマッター・テストフレームワークは未設定。検証は `pnpm verify` と CI（`.github/workflows/ci.yml`）で行う。
+リンター・フォーマッターは Biome（`biome.json`。2スペース・シングルクォート・行幅100）。`.astro` は frontmatter しか解析されずテンプレート側の参照を見ないため、未使用変数・import 系のルールを `overrides` で外している。テストフレームワークは未設定。検証は `pnpm verify` と CI（`.github/workflows/ci.yml`）で行う。
 
 ## アーキテクチャ
 

@@ -43,6 +43,9 @@ jobs:
       - name: 依存関係をインストール（lock ファイルから厳密に）
         run: pnpm install --frozen-lockfile
 
+      - name: Biome（lint・フォーマット・import 整列）
+        run: pnpm lint
+
       - name: 型チェック
         run: pnpm check
 
