@@ -5,9 +5,15 @@ import SiteHeader from '../components/SiteHeader.astro';
 interface Props {
   title?: string;
   description?: string;
+  ogType?: 'website' | 'article';
 }
 
-const { title = '@tonosaki', description = '@tonosakiの個人サイトです。' } = Astro.props;
+const { title = '@tonosaki', description = '@tonosakiの個人サイトです。', ogType = 'website' } = Astro.props;
+
+// サイト内リンク（/habitats など）に合わせ、トップ以外は末尾スラッシュを外す
+const canonicalPath = Astro.url.pathname.replace(/(.)\/$/, '$1');
+const canonical = new URL(canonicalPath, Astro.site);
+const ogImage = new URL('/og.png', Astro.site);
 
 const fontHref =
   'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap';
@@ -21,6 +27,18 @@ const fontHref =
     <link rel="icon" type="image/webp" href="/icon-dev.webp" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="@tonosaki" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:image" content={ogImage.href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="@tonosaki（katoline.com）" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#0b0b0d" />
     <link rel="preload" as="image" href="/icon-dev.webp" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,8 +50,11 @@ const fontHref =
     <title>{title}</title>
     <script is:inline>
       (function() {
-        const savedTheme = localStorage.getItem('theme');
-        const theme = savedTheme || 'dark';
+        var savedTheme = null;
+        try {
+          savedTheme = localStorage.getItem('theme');
+        } catch (e) {}
+        var theme = savedTheme || 'dark';
         document.documentElement.setAttribute('data-theme', theme);
         var meta = document.querySelector('meta[name="theme-color"]');
         if (meta) {
@@ -59,7 +80,9 @@ const fontHref =
           var current = document.documentElement.getAttribute('data-theme') || 'dark';
           var next = current === 'light' ? 'dark' : 'light';
           document.documentElement.setAttribute('data-theme', next);
-          localStorage.setItem('theme', next);
+          try {
+            localStorage.setItem('theme', next);
+          } catch (e) {}
           var meta = document.querySelector('meta[name="theme-color"]');
           if (meta) meta.setAttribute('content', THEME_COLOR[next]);
         });
