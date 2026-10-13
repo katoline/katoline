@@ -39,7 +39,6 @@ const rowClass =
 
 <section aria-labelledby={sectionId} class={extraClass}>
   <ListSectionTitle
-    level={2}
     text={title}
     withDivider={withDivider}
     class="mb-4"
@@ -48,7 +47,9 @@ const rowClass =
     countSuffix={countSuffix}
   />
 
-  {areas.map((area) => {
+  {sectionCount === 0 ? (
+    <p class="text-sm text-muted">まだありません</p>
+  ) : areas.map((area) => {
     const list = (
       <ul class="card divide-y divide-border p-2">
         {area.places.map((place) => {
@@ -68,6 +69,7 @@ const rowClass =
                   {external && (
                     <span class="shrink-0 text-sm text-subtle" aria-hidden="true">↗</span>
                   )}
+                  {external && <span class="sr-only">（新しいタブで開く）</span>}
                 </a>
               ) : (
                 <div class={rowClass}>
