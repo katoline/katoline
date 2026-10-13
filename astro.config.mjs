@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
-import react from "@astrojs/react";
 import { unified } from "@astrojs/markdown-remark";
 import tailwindcss from "@tailwindcss/vite";
 import { remarkCodeFilename } from "./src/lib/remark-code-filename.mjs";
@@ -9,6 +8,7 @@ import { transformerCodeFilename } from "./src/lib/shiki-filename-transformer.mj
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://katoline.com",
   // v7 の既定は Sätteri。remark プラグインを使うため従来の unified パイプラインを維持する
   markdown: {
     processor: unified({ remarkPlugins: [remarkCodeFilename] }),
@@ -16,7 +16,7 @@ export default defineConfig({
       transformers: [transformerCodeFilename()],
     },
   },
-  integrations: [mdx(), react()],
+  integrations: [mdx()],
   // v7 の既定 'jsx'（JSX 規則で空白を詰める）から従来の HTML 規則に戻し、見た目を変えない
   compressHTML: true,
   build: {

@@ -51,8 +51,15 @@ pnpm verify
 
 ```
 /
-├── public/                    # 静的ファイル（画像、アイコンなど）
-│   └── icon-dev.webp
+├── .claude/
+│   └── skills/               # Claude Code 用スキル（anime-list / season-change）
+├── .github/
+│   ├── workflows/            # CI（ci.yml）・マージ済みブランチ削除
+│   └── dependabot.yml        # 依存更新
+├── .vscode/                  # エディタ設定
+├── public/                   # 静的ファイル（画像、アイコンなど）
+│   ├── icon-dev.webp
+│   └── og.png                # OGP 画像（1200×630、英数字のみ）
 ├── src/
 │   ├── components/            # Astroコンポーネント
 │   │   ├── mdx/              # ブログ MDX から使うコンポーネント
@@ -75,12 +82,13 @@ pnpm verify
 │   │   ├── last-season-anime.astro # 前期視聴アニメ（データ・描画）
 │   │   └── watch-anime.astro # 今期視聴アニメ（データ・描画）
 │   ├── lib/
+│   │   ├── blog.ts           # ブログ記事の共通ヘルパー（下書き除外・並び順）
 │   │   ├── remark-code-filename.mjs
 │   │   └── shiki-filename-transformer.mjs
 │   ├── pages/                # ページファイル
 │   │   ├── blog/             # ブログ関連ページ
 │   │   │   └── [slug].astro # ブログ記事詳細ページ
-│   │   ├── blog.astro        # ブログ一覧ページ
+│   │   ├── blog.astro        # ブログ一覧ページ（現在トップからの導線なし）
 │   │   ├── habitats.astro    # よく行く場所ページ
 │   │   ├── index.astro       # ホームページ
 │   │   ├── last-season-anime.astro # 前期視聴アニメのラッパー（本体は src/anime-list/）

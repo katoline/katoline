@@ -66,6 +66,7 @@ const pagesLinks: PagesLinkItem[] = [
         >
           {external ? '↗' : '→'}
         </span>
+        {external && <span class="sr-only">（新しいタブで開く）</span>}
       </a>
     );
   })}

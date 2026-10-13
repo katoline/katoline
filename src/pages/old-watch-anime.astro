@@ -18,7 +18,7 @@ import { OldWatchAnimes } from '../anime-list/anime-list';
         <label class="text-sm text-muted" for="anime-search">
           アニメ、漫画名で検索
         </label>
-        <p id="search-count" class="text-xs text-muted">{OldWatchAnimes.length}件</p>
+        <p id="search-count" class="text-xs text-muted" aria-live="polite">{OldWatchAnimes.length}件</p>
       </div>
       <input
         id="anime-search"
@@ -56,7 +56,7 @@ import { OldWatchAnimes } from '../anime-list/anime-list';
       const items = Array.from(list.querySelectorAll('li'));
 
       input.addEventListener('input', () => {
-        const query = input.value.toLowerCase();
+        const query = input.value.trim().toLowerCase();
         let visible = 0;
 
         items.forEach((item) => {
