@@ -1,9 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import ListPageLayout from '../components/ListPageLayout.astro';
-import PlacesSection, {
-  type Place,
-} from '../components/PlacesSection.astro';
+import PlacesSection, { type Place } from '../components/PlacesSection.astro';
+import Layout from '../layouts/Layout.astro';
 
 const dartSpots: Place[] = [
   { label: 'myroom plus（松戸）', href: 'https://share.google/x63EvSUExJgrFeMFL' },
@@ -32,7 +30,10 @@ const shopAreas: { id: string; title: string; places: Place[] }[] = [
       { label: 'なりたけ 津田沼店', href: 'https://share.google/YHzxDyzOyXYw6aTcd' },
       { label: '豚骨醬油らーめん 一心（新松戸）', href: 'https://share.google/FNcb6W94HPIqVa9y6' },
       { label: '舎鈴 南柏店', href: 'https://share.google/FyNroadXLjVYFyrp0' },
-      { label: '浜焼き海鮮居酒屋 大庄水産 新松戸西口店', href: 'https://share.google/n3TqhMDbdEtd1Z7P1' },
+      {
+        label: '浜焼き海鮮居酒屋 大庄水産 新松戸西口店',
+        href: 'https://share.google/n3TqhMDbdEtd1Z7P1',
+      },
       { label: '松屋 南柏店', href: 'https://share.google/7QbNVO7hfCqDo1Bgy' },
       { label: 'サイゼリヤ 南柏店', href: 'https://share.google/mEAfpX2iDSwdg3G3u' },
     ],

@@ -43,8 +43,11 @@ pnpm preview
 ### 検証
 
 ```bash
-# 型チェック → ビルド → 内部リンク検査
+# Biome → 型チェック → ビルド → 内部リンク検査
 pnpm verify
+
+# Biome の安全な修正（整形・import 整列など）を自動適用
+pnpm lint:fix
 ```
 
 ## 📁 プロジェクト構造

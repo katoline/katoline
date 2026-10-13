@@ -8,15 +8,18 @@ interface Props {
   ogType?: 'website' | 'article';
 }
 
-const { title = '@tonosaki', description = '@tonosakiの個人サイトです。', ogType = 'website' } = Astro.props;
+const {
+  title = '@tonosaki',
+  description = '@tonosakiの個人サイトです。',
+  ogType = 'website',
+} = Astro.props;
 
 // サイト内リンク（/habitats など）に合わせ、トップ以外は末尾スラッシュを外す
 const canonicalPath = Astro.url.pathname.replace(/(.)\/$/, '$1');
 const canonical = new URL(canonicalPath, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
 
-const fontHref =
-  'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap';
+const fontHref = 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap';
 ---
 
 <!doctype html>
