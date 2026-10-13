@@ -37,6 +37,7 @@
   --color-subtle: var(--subtle);
   --color-border: var(--border);
   --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
   --color-accent: var(--accent);
 }
 
