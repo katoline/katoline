@@ -55,7 +55,7 @@ Layout.astro（HTML シェル・テーマ初期化・Google Fonts・SiteHeader�
 - **コードフェンス**: `json:package.json` のように `lang:filename` と書くと、Shiki の言語とファイル名表示に分解される（`src/lib/remark-code-filename.mjs`。remark プラグインを使うため `astro.config.mjs` で v7 の既定 Sätteri ではなく `unified()` パイプラインを指定している）
 - **アニメリスト**: `src/anime-list/` に集約。`anime-list.ts` が過去視聴分を `OldWatchAnimes`（`string[]`）として export → `src/pages/old-watch-anime.astro` で使用。今期分は `src/anime-list/watch-anime.astro` 内に `Place[]` で定義（`src/pages/watch-anime.astro` はこれを描画するだけのラッパーで、Astro のルーティングのために `src/pages/` に置いている）。前期分は `src/anime-list/last-season-anime.astro` に同じ形で定義する
   - シーズンが変わったら `/season-change`（`.claude/skills/season-change/`）で今期分を前期へ移し（前期の旧一覧は置き換えで消える）、新シーズンの放送作品を公式サイト付きで調べて `src/anime-list/season-anime-list.md` に出力する
-  - 新しく見たタイトルは `src/anime-list/anime-list.md`（gitignore 対象）に1行1タイトルで書き、`/anime-list`（`.claude/skills/anime-list/`）で `OldWatchAnimes` 末尾へ転記する。転記後 md は空になる
+  - 新しく見たタイトルは `src/anime-list/anime-list.md`に1行1タイトルで書き、`/anime-list`（`.claude/skills/anime-list/`）で `OldWatchAnimes` 末尾へ転記する。転記後 md は空になる
 - **生息地データ**: `habitats.astro` 内に `Place[]` で直接定義
 
 ### テーマシステム

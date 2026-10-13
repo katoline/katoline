@@ -80,9 +80,10 @@ pnpm lint:fix
 │   ├── layouts/              # レイアウトコンポーネント
 │   │   └── Layout.astro
 │   ├── anime-list/           # アニメリスト（よく編集する）
-│   │   ├── anime-list.md     # 新規視聴タイトルのメモ（gitignore 対象）
+│   │   ├── anime-list.md     # 新規視聴タイトルのメモ
 │   │   ├── anime-list.ts     # 過去視聴アニメ・漫画（OldWatchAnimes）
 │   │   ├── last-season-anime.astro # 前期視聴アニメ（データ・描画）
+│   │   ├── season-anime-list.md # /season-change が出力する新シーズンの放送作品一覧
 │   │   └── watch-anime.astro # 今期視聴アニメ（データ・描画）
 │   ├── lib/
 │   │   ├── blog.ts           # ブログ記事の共通ヘルパー（下書き除外・並び順）
