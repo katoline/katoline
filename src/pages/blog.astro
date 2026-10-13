@@ -1,20 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ListPageLayout from '../components/ListPageLayout.astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getPublishedPosts, type BlogEntry } from '../lib/blog';
 
-type BlogEntry = CollectionEntry<'blog'>;
-
-const posts = (
-  await getCollection(
-    'blog',
-    (entry: BlogEntry) => !entry.data.draft,
-  )
-).sort((a: BlogEntry, b: BlogEntry) => {
-  const ad = a.data.date?.getTime() ?? 0;
-  const bd = b.data.date?.getTime() ?? 0;
-  return bd - ad;
-});
+const posts = await getPublishedPosts();
 ---
 
 <Layout
@@ -34,12 +23,12 @@ const posts = (
         {posts.map((post: BlogEntry) => (
           <li>
             <a
-              href={`/blog/${post.id}/`}
+              href={`/blog/${post.id}`}
               class="card group flex flex-col gap-2 p-5 text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/50"
             >
               {post.data.date && (
                 <p class="text-xs tracking-wide text-muted">
-                  {post.data.date.toLocaleDateString('ja-JP')}
+                  {post.data.date.toLocaleDateString('ja-JP', { timeZone: 'UTC' })}
                 </p>
               )}
               <h2 class="text-lg font-bold leading-snug group-hover:text-accent">
