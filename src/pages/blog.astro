@@ -1,7 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import ListPageLayout from '../components/ListPageLayout.astro';
-import { getPublishedPosts, type BlogEntry } from '../lib/blog';
+import Layout from '../layouts/Layout.astro';
+import { type BlogEntry, getPublishedPosts } from '../lib/blog';
 
 const posts = await getPublishedPosts();
 ---

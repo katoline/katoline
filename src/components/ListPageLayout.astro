@@ -6,12 +6,7 @@ interface Props {
   description?: string;
 }
 
-const {
-  title,
-  backHref = '/',
-  backLabel = 'ホーム',
-  description,
-} = Astro.props;
+const { title, backHref = '/', backLabel = 'ホーム', description } = Astro.props;
 ---
 
 <main class="px-4 pt-8 pb-16 sm:pt-10">

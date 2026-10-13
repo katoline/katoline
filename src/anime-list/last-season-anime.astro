@@ -1,9 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import ListPageLayout from '../components/ListPageLayout.astro';
-import PlacesSection, {
-  type Place,
-} from '../components/PlacesSection.astro';
+import PlacesSection, { type Place } from '../components/PlacesSection.astro';
+import Layout from '../layouts/Layout.astro';
 
 // 前期視聴アニメのリスト
 // 今期のアニメが終わったら、watch-anime.astro の thisSeasonAnimes をここへ移し、
@@ -29,7 +27,11 @@ const lastSeasonAnimes: Place[] = [
   { label: '乙女ゲー世界はモブに厳しい世界です2', href: '' },
   { label: '黒猫と魔女の教室', href: '' },
   { label: '不死身な僕の日常　シーズン4', href: '' },
-  { label: '才女のお世話 高嶺の花だらけな名門校で、学院一のお嬢様(生活能力皆無)を陰ながらお世話することになりました', href: '' },
+  {
+    label:
+      '才女のお世話 高嶺の花だらけな名門校で、学院一のお嬢様(生活能力皆無)を陰ながらお世話することになりました',
+    href: '',
+  },
   { label: '透明な夜に駆ける君と、目に見えない恋をした。', href: '' },
   { label: '盗掘王', href: '' },
   { label: 'クレバテスⅡ-魔獣の王と偽りの勇者伝承-', href: '' },

@@ -59,7 +59,9 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   line-height: 1.7;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 ::selection {
@@ -173,7 +175,9 @@ body {
 }
 
 .prose code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
   font-size: 0.88em;
   background-color: var(--surface);
   border: 1px solid var(--border);
@@ -182,7 +186,9 @@ body {
 }
 
 .prose pre {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
   font-size: 0.85rem;
   background-color: var(--surface);
   border: 1px solid var(--border);
@@ -263,6 +269,7 @@ body {
   margin-bottom: 0.5rem;
 }
 
+/* biome-ignore-start lint/complexity/noImportantStyles: 動きを減らす設定ではコンポーネントの transition / hover 移動のユーティリティより必ず優先させる */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -278,3 +285,4 @@ body {
     translate: none !important;
   }
 }
+/* biome-ignore-end lint/complexity/noImportantStyles: 同上 */

@@ -1,8 +1,8 @@
 // ビルド成果物（dist/）の内部リンク・画像参照が実在するかを検査する
-import { readdir, readFile, stat } from "node:fs/promises";
-import { join, relative, sep } from "node:path";
+import { readdir, readFile, stat } from 'node:fs/promises';
+import { join, relative, sep } from 'node:path';
 
-const DIST = "dist";
+const DIST = 'dist';
 
 // 再帰的に .html を集める
 async function collectHtml(dir) {
@@ -12,7 +12,7 @@ async function collectHtml(dir) {
     const path = join(dir, entry.name);
     if (entry.isDirectory()) {
       files.push(...(await collectHtml(path)));
-    } else if (entry.name.endsWith(".html")) {
+    } else if (entry.name.endsWith('.html')) {
       files.push(path);
     }
   }
@@ -25,7 +25,7 @@ function extractRefs(html) {
   const pattern = /\b(?:href|src)="([^"]*)"/g;
   for (const match of html.matchAll(pattern)) {
     const value = match[1];
-    if (value.startsWith("/") && !value.startsWith("//")) {
+    if (value.startsWith('/') && !value.startsWith('//')) {
       refs.push(value);
     }
   }
@@ -51,7 +51,7 @@ async function resolves(ref) {
   }
   const target = join(DIST, decoded);
   if (await exists(target)) return true;
-  return exists(join(target, "index.html"));
+  return exists(join(target, 'index.html'));
 }
 
 try {
@@ -66,11 +66,11 @@ const broken = [];
 let total = 0;
 
 for (const file of htmlFiles) {
-  const html = await readFile(file, "utf8");
+  const html = await readFile(file, 'utf8');
   for (const ref of extractRefs(html)) {
     total++;
     if (!(await resolves(ref))) {
-      broken.push({ page: relative(".", file).split(sep).join("/"), ref });
+      broken.push({ page: relative('.', file).split(sep).join('/'), ref });
     }
   }
 }

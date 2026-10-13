@@ -1,9 +1,9 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import { render } from 'astro:content';
 import ListPageLayout from '../../components/ListPageLayout.astro';
 import Details from '../../components/mdx/Details.astro';
-import { render } from 'astro:content';
-import { getPublishedPosts, type BlogEntry } from '../../lib/blog';
+import Layout from '../../layouts/Layout.astro';
+import { type BlogEntry, getPublishedPosts } from '../../lib/blog';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
