@@ -26,3 +26,6 @@ pnpm-debug.log*
 # Nix
 .direnv/
 result
+
+anime-list.md
+season-anime-list.md

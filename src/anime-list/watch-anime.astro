@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ListPageLayout from '../components/ListPageLayout.astro';
+import PlacesSection, {
+  type Place,
+} from '../components/PlacesSection.astro';
+
+// 今期視聴アニメのリスト
+// 例:
+// { label: 'アニメタイトル', href: 'https://example.com' }
+const thisSeasonAnimes: Place[] = [];
+---
+
+<Layout 
+  title="今期視聴アニメ - @tonosaki"
+  description="今期視聴しているアニメのメモです。"
+>
+  <ListPageLayout
+    title="今期視聴アニメ"
+    backHref="/"
+    description="今期視聴しているアニメのメモです。"
+  >
+    <PlacesSection
+      sectionId="this-season-anime-heading"
+      title="今期視聴アニメ一覧"
+      class="mb-4"
+      countSuffix="作品"
+      areas={[
+        {
+          id: '2026-autumn-anime',
+          title: '2026年秋アニメ',
+          places: thisSeasonAnimes,
+        },
+      ]}
+    />
+  </ListPageLayout>
+</Layout>

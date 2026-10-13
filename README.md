@@ -62,8 +62,12 @@ pnpm preview
 │   ├── content.config.ts     # コレクション設定
 │   ├── layouts/              # レイアウトコンポーネント
 │   │   └── Layout.astro
+│   ├── anime-list/           # アニメリスト（よく編集する）
+│   │   ├── anime-list.md     # 新規視聴タイトルのメモ（gitignore 対象）
+│   │   ├── anime-list.ts     # 過去視聴アニメ・漫画（OldWatchAnimes）
+│   │   ├── last-season-anime.astro # 前期視聴アニメ（データ・描画）
+│   │   └── watch-anime.astro # 今期視聴アニメ（データ・描画）
 │   ├── lib/
-│   │   ├── anime-list.ts     # 過去視聴アニメ・漫画
 │   │   ├── remark-code-filename.mjs
 │   │   └── shiki-filename-transformer.mjs
 │   ├── pages/                # ページファイル
@@ -72,8 +76,9 @@ pnpm preview
 │   │   ├── blog.astro        # ブログ一覧ページ
 │   │   ├── habitats.astro    # よく行く場所ページ
 │   │   ├── index.astro       # ホームページ
+│   │   ├── last-season-anime.astro # 前期視聴アニメのラッパー（本体は src/anime-list/）
 │   │   ├── old-watch-anime.astro
-│   │   └── watch-anime.astro # 今期視聴アニメページ
+│   │   └── watch-anime.astro # 今期視聴アニメのラッパー（本体は src/anime-list/）
 │   └── styles/               # グローバルスタイル
 │       └── global.css
 ├── astro.config.mjs          # Astro設定ファイル
