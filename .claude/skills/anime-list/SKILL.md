@@ -7,7 +7,7 @@ description: src/anime-list/anime-list.md に書かれたアニメのタイト�
 
 ## 対象ファイル
 
-- 入力: `src/anime-list/anime-list.md`（`.gitignore` 対象のメモ用ファイル）
+- 入力: `src/anime-list/anime-list.md`（メモ用ファイル）
 - 出力: `src/anime-list/anime-list.ts` の `export const OldWatchAnimes = [ ... ];`
 
 ## 手順
