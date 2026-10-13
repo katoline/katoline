@@ -1,0 +1,23 @@
+version: 2
+updates:
+  # npm パッケージ（週次・マイナーとパッチは1つの PR にまとめる）
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    ignore:
+      # astro check（@astrojs/language-server）が TypeScript 7 に未対応のため。対応したら外す
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  # GitHub Actions（月次）
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
