@@ -6,7 +6,40 @@ import Layout from '../layouts/Layout.astro';
 // 今期視聴アニメのリスト
 // 例:
 // { label: 'アニメタイトル', href: 'https://example.com' }
-const thisSeasonAnimes: Place[] = [];
+const thisSeasonAnimes: Place[] = [
+  { label: 'アオのハコ Season2', href: 'https://aonohako-anime.com/' },
+  { label: '帰還者の魔法は特別です 第2期', href: 'https://returners-magic.com/' },
+  { label: '氷の城壁 第2期', href: 'https://korinojoheki-pr.com/' },
+  { label: '塩対応の佐藤さんが俺にだけ甘い', href: 'https://shioama-anime.com/' },
+  { label: '信者ゼロの女神サマと始める異世界攻略', href: 'https://zero-believers-anime.com/' },
+  { label: '世界最強の魔女、始めました', href: 'https://sekamajo-anime.com/' },
+  { label: '千歳くんはラムネ瓶のなか 第2クール', href: 'https://chiramune.com/' },
+  {
+    label: '追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。',
+    href: 'https://sh-anime.shochiku.co.jp/chiifuyo-anime/',
+  },
+  { label: '転生貴族、鑑定スキルで成り上がる 第3期', href: 'https://kanteiskill.com/' },
+  { label: '転生したら剣でしたII', href: 'https://tenken-anime.com/' },
+  { label: 'とある暗部の少女共棲', href: 'https://toaru-project.com/item/' },
+  { label: 'どうも、好きな人に惚れ薬を依頼された魔女です。', href: 'https://horemajo-anime.com/' },
+  { label: 'ドラゴンボール超 ビルス', href: 'https://dragonball-super.com/' },
+  { label: '刃牙道 第2クール', href: 'https://baki-anime.jp/' },
+  { label: '冰剣の魔術師が世界を統べるⅡ', href: 'https://hyouken-anime.com/' },
+  {
+    label: '目覚めたら最強装備と宇宙船持ちだったので、一戸建て目指して傭兵として自由に生きたい',
+    href: 'https://saikyosoubi.com/',
+  },
+  { label: '薬屋のひとりごと 第3期', href: 'https://kusuriyanohitorigoto.jp/season3/' },
+  { label: '野生のラスボスが現れた！ 第2期', href: 'https://www.lastboss-anime.com/' },
+  {
+    label: '弱気MAX令嬢なのに、辣腕婚約者様の賭けに乗ってしまった',
+    href: 'https://yowaki-max-anime.com/',
+  },
+  {
+    label: '追放された転生重騎士はゲーム知識で無双する',
+    href: 'https://sh-anime.shochiku.co.jp/jukishi-anime/',
+  },
+];
 ---
 
 <Layout 
