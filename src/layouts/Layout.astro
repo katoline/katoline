@@ -19,6 +19,8 @@ const canonicalPath = Astro.url.pathname.replace(/(.)\/$/, '$1');
 const canonical = new URL(canonicalPath, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
 
+const year = new Date().getFullYear();
+
 const fontHref = 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap';
 ---
 
@@ -71,8 +73,10 @@ const fontHref = 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400
     <div class="flex-1">
       <slot />
     </div>
-    <footer class="px-4 py-8 text-center text-xs text-subtle">
-      @tonosaki
+    <footer class="px-4 pt-6 pb-10">
+      <p class="mx-auto max-w-3xl border-t border-border pt-6 text-center text-xs tracking-wide text-subtle">
+        © {year} @tonosaki
+      </p>
     </footer>
     <script is:inline>
       (function() {
