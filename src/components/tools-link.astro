@@ -1,0 +1,27 @@
+---
+import LinkCards, { type LinkCardItem } from './link-cards.astro';
+
+// https://t0n03k1.com のツール（名前は各アプリの manifest に合わせ、説明は1行に収まるよう短くする）
+const toolsLinks: LinkCardItem[] = [
+  {
+    name: '画像の変換・圧縮',
+    hint: '変換・圧縮・アイコン生成',
+    url: 'https://t0n03k1.com/image-adjust/',
+    icon: 'image',
+  },
+  {
+    name: 'Markdown → PDF',
+    hint: 'Markdown を整えて PDF に保存',
+    url: 'https://t0n03k1.com/markdown-pdf/',
+    icon: 'file-text',
+  },
+  {
+    name: 'QRコード生成',
+    hint: 'アイコン入りの QR コードを作成',
+    url: 'https://t0n03k1.com/qr-code/',
+    icon: 'qr-code',
+  },
+];
+---
+
+<LinkCards id="tools-title" title="Tools" links={toolsLinks} />

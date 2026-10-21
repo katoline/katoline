@@ -1,6 +1,7 @@
 ---
 import PagesLinks from '../components/pages-link.astro';
 import SnsLinks from '../components/sns-link.astro';
+import ToolsLinks from '../components/tools-link.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -10,7 +11,7 @@ import Layout from '../layouts/Layout.astro';
 >
   <main class="px-4 pt-10 pb-16 sm:pt-14">
     <div class="mx-auto max-w-3xl">
-      <section class="card relative mb-8 overflow-hidden p-6 sm:p-8">
+      <section class="card relative mb-10 overflow-hidden p-6 sm:p-8">
         <div
           class="pointer-events-none absolute -right-20 -top-24 h-56 w-56 rounded-full opacity-70"
           style="background: radial-gradient(circle, rgba(167,139,250,0.28) 0%, rgba(251,146,60,0.12) 42%, transparent 70%);"
@@ -39,7 +40,10 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </section>
 
-      <PagesLinks />
+      <div class="space-y-10">
+        <PagesLinks />
+        <ToolsLinks />
+      </div>
     </div>
   </main>
 </Layout>
