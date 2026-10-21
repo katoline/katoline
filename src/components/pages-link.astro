@@ -1,11 +1,7 @@
 ---
-interface PagesLinkItem {
-  name: string;
-  hint: string;
-  url: string;
-}
+import LinkCards, { type LinkCardItem } from './link-cards.astro';
 
-const pagesLinks: PagesLinkItem[] = [
+const pagesLinks: LinkCardItem[] = [
   // {
   //   name: "ブログ",
   //   hint: "テックと感想",
@@ -15,59 +11,33 @@ const pagesLinks: PagesLinkItem[] = [
     name: '生息地',
     hint: 'よくいる場所',
     url: '/habitats',
+    icon: 'map-pin',
   },
   {
     name: '今期視聴アニメ',
     hint: '今期のメモ',
     url: '/watch-anime',
+    icon: 'tv',
   },
   {
     name: '前期視聴アニメ',
     hint: '前期のメモ',
     url: '/last-season-anime',
+    icon: 'calendar',
   },
   {
     name: '視聴履歴',
     hint: '今まで見たアニメ・漫画',
     url: '/old-watch-anime',
+    icon: 'history',
   },
   {
     name: '神アニメ Top20',
     hint: '個人的ランキング',
     url: 'https://animestore.docomo.ne.jp/animestore/CF/mylist_detail?shareListId=gLbhU4RDbdTIETuo',
+    icon: 'trophy',
   },
 ];
 ---
 
-<nav class="grid grid-cols-1 gap-3 sm:grid-cols-2" aria-label="ページナビゲーション">
-  {pagesLinks.map((link, index) => {
-    const external = /^https?:\/\//i.test(link.url);
-    const wide = pagesLinks.length % 2 === 1 && index === pagesLinks.length - 1;
-
-    return (
-      <a
-        href={link.url}
-        class:list={[
-          'card group flex items-end justify-between gap-4 p-5 text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/50',
-          wide && 'sm:col-span-2',
-        ]}
-        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      >
-        <span class="min-w-0">
-          <span class="block text-[0.7rem] tracking-[0.16em] text-muted">
-            {external ? 'EXTERNAL' : 'PAGE'}
-          </span>
-          <span class="mt-2 block text-base font-bold">{link.name}</span>
-          <span class="mt-1 block text-sm text-muted">{link.hint}</span>
-        </span>
-        <span
-          class="mb-0.5 shrink-0 text-subtle transition-colors group-hover:text-accent"
-          aria-hidden="true"
-        >
-          {external ? '↗' : '→'}
-        </span>
-        {external && <span class="sr-only">（新しいタブで開く）</span>}
-      </a>
-    );
-  })}
-</nav>
+<LinkCards id="pages-title" title="Pages" links={pagesLinks} />
