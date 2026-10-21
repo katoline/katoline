@@ -67,13 +67,15 @@ pnpm lint:fix
 │   ├── components/            # Astroコンポーネント
 │   │   ├── mdx/              # ブログ MDX から使うコンポーネント
 │   │   │   └── Details.astro
+│   │   ├── link-cards.astro  # アイコン付きリンクカードの共通部品（Pages / Tools）
 │   │   ├── ListPageLayout.astro
 │   │   ├── ListSectionTitle.astro
-│   │   ├── pages-link.astro
+│   │   ├── pages-link.astro  # ホームの Pages セクション（データ定義）
 │   │   ├── PlacesSection.astro
 │   │   ├── SiteHeader.astro
 │   │   ├── sns-link.astro
-│   │   └── ThemeToggle.astro
+│   │   ├── ThemeToggle.astro
+│   │   └── tools-link.astro  # ホームの Tools セクション（t0n03k1.com のツール）
 │   ├── content/              # Content Collections
 │   │   └── blog/             # ブログ記事（MDX）
 │   ├── content.config.ts     # コレクション設定
