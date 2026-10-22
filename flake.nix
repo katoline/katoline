@@ -2,7 +2,7 @@
   description = "katoline devShell (Astro + pnpm)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.follows = "nodejs-nixpkgs";
     # Node.js 本体と共有ライブラリのセキュリティ修正を含む入力。通常のチャンネル反映を待たない。
     nodejs-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     flake-utils.url = "github:numtide/flake-utils";
@@ -32,6 +32,8 @@
             ];
           };
         in
+        assert pkgs.lib.versionAtLeast pkgs.openssl.version "3.5.9";
+        assert pkgs.lib.versionAtLeast pkgs.cacert.version "3.131.1";
         {
           devShells.default = pkgs.mkShell {
             packages = [
