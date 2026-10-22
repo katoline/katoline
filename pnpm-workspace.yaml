@@ -1,3 +1,6 @@
+# セキュリティ修正前・EOL の Node.js でのインストールを拒否する。
+engineStrict: true
+
 # pnpm 11 の設定ファイル（モノレポではない。ビルドスクリプトの許可リスト）
 allowBuilds:
   esbuild: true
