@@ -11,7 +11,7 @@
     "check:links": "node scripts/check-links.mjs",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "verify": "pnpm lint && pnpm check && pnpm build && pnpm check:links"
+    "verify": "node scripts/check-node-security.mjs && pnpm lint && pnpm check && pnpm build && pnpm check:links"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.3",
