@@ -84,7 +84,7 @@ Layout.astro（HTML シェル・テーマ初期化・Google Fonts・SiteHeader�
 
 - Vercel（Hobby）に静的出力（adapter なし）でデプロイ
 - `vercel.json` で `headers` のみ定義（キャッシュとセキュリティヘッダー）。`/_astro/*` は immutable、`*.webp` は1週間、HTML は Vercel 既定
-- CSP は未設定（インラインスクリプト・onerror 属性があるため）
+- CSP は Astro の `security.csp` でページごとのスクリプト・スタイルのハッシュを自動生成する。インラインイベント属性は使わず、外部フォントは Google Fonts だけを許可。Shiki 等の style 属性だけを別のディレクティブで許可する。meta では効かない `frame-ancestors` は `vercel.json` のヘッダーで拒否する
 - `astro.config.mjs` に `site: "https://katoline.com"` を設定している（canonical と OGP の絶対 URL の基点）。`Layout.astro` が全ページに canonical・OGP・Twitter カードのメタを出す。OGP 画像は `public/og.png`（1200×630、英数字のみ。日本語フォントが無い環境でも化けないため）
 - Dependabot が依存更新 PR を出し、CI（`.github/workflows/ci.yml`）が通ったものをマージする
 
