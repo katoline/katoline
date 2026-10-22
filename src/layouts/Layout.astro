@@ -22,6 +22,24 @@ const ogImage = new URL('/og.png', Astro.site);
 const year = new Date().getFullYear();
 
 const fontHref = 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap';
+
+// is:inline は Astro の自動ハッシュ収集の対象外なので、出力する文字列そのものを登録する。
+const themeInitScript = `(function() {
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem('theme'); } catch (e) {}
+  var theme = savedTheme === 'light' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+  var meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', theme === 'light' ? '#f4f0ea' : '#0b0b0d');
+})();`;
+const themeInitDigest = await crypto.subtle.digest(
+  'SHA-256',
+  new TextEncoder().encode(themeInitScript),
+);
+Astro.csp?.insertScriptHash({
+  hash: `sha256-${btoa(String.fromCharCode(...new Uint8Array(themeInitDigest)))}`,
+  kind: 'element',
+});
 ---
 
 <!doctype html>
@@ -48,25 +66,9 @@ const fontHref = 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400
     <link rel="preload" as="image" href="/icon-dev.webp" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href={fontHref} rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript>
-      <link href={fontHref} rel="stylesheet" />
-    </noscript>
+    <link href={fontHref} rel="stylesheet" />
     <title>{title}</title>
-    <script is:inline>
-      (function() {
-        var savedTheme = null;
-        try {
-          savedTheme = localStorage.getItem('theme');
-        } catch (e) {}
-        var theme = savedTheme || 'dark';
-        document.documentElement.setAttribute('data-theme', theme);
-        var meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) {
-          meta.setAttribute('content', theme === 'light' ? '#f4f0ea' : '#0b0b0d');
-        }
-      })();
-    </script>
+    <script is:inline set:html={themeInitScript} />
   </head>
   <body class="min-h-screen flex flex-col bg-background text-foreground font-sans antialiased text-[0.95rem] leading-relaxed">
     <SiteHeader />
@@ -78,14 +80,14 @@ const fontHref = 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400
         © {year} @tonosaki
       </p>
     </footer>
-    <script is:inline>
+    <script>
       (function() {
         var THEME_COLOR = { dark: '#0b0b0d', light: '#f4f0ea' };
         var toggle = document.getElementById('theme-toggle');
         if (!toggle) return;
         toggle.addEventListener('click', function() {
           var current = document.documentElement.getAttribute('data-theme') || 'dark';
-          var next = current === 'light' ? 'dark' : 'light';
+          const next = current === 'light' ? 'dark' : 'light';
           document.documentElement.setAttribute('data-theme', next);
           try {
             localStorage.setItem('theme', next);

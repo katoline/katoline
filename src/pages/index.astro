@@ -20,6 +20,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="relative flex flex-col items-center gap-6 sm:flex-row sm:items-center sm:gap-8">
           <div class="avatar-glow h-28 w-28 shrink-0 overflow-hidden rounded-full bg-surface sm:h-32 sm:w-32">
             <img 
+              id="profile-avatar"
               src="/icon-dev.webp" 
               alt="Tonosakiのプロフィール写真" 
               class="h-full w-full object-cover"
@@ -28,7 +29,6 @@ import Layout from '../layouts/Layout.astro';
               width="128"
               height="128"
               decoding="async"
-              onerror={"this.style.display='none'; this.parentElement.innerHTML='<span class=\"flex h-full items-center justify-center text-muted text-4xl\">🐱</span>'"}
             />
           </div>
           <div class="text-center sm:text-left">
@@ -47,3 +47,17 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </main>
 </Layout>
+
+<script>
+  const avatar = document.getElementById('profile-avatar');
+  if (avatar instanceof HTMLImageElement) {
+    const showFallback = () => {
+      const fallback = document.createElement('span');
+      fallback.className = 'flex h-full items-center justify-center text-muted text-4xl';
+      fallback.textContent = '🐱';
+      avatar.replaceWith(fallback);
+    };
+    avatar.addEventListener('error', showFallback, { once: true });
+    if (avatar.complete && avatar.naturalWidth === 0) showFallback();
+  }
+</script>
