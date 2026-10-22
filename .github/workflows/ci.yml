@@ -32,6 +32,9 @@ jobs:
           check-latest: true
 
       # リポジトリの設定で GitHub 公式の Action しか使えないため、pnpm/action-setup ではなく npm で入れる
+      - name: Node.js と依存ライブラリの修正版を確認
+        run: node scripts/check-node-security.mjs
+
       - name: pnpm を準備
         run: |
           npm install -g pnpm@11.22.0
