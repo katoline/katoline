@@ -10,9 +10,10 @@
 
   outputs = { self, nixpkgs, nodejs-nixpkgs, flake-utils }:
     flake-utils.lib.eachSystem
+      # nixpkgs 26.11 で x86_64-darwin のサポートが打ち切られたため含めない。
+      # 一覧に残すと import が throw し、他のシステムの評価まで巻き添えで失敗する。
       [
         "aarch64-darwin"
-        "x86_64-darwin"
         "x86_64-linux"
         "aarch64-linux"
       ]
